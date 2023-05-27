@@ -4,6 +4,7 @@ import KAGO_framework.control.ViewController;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import my_project.model.Ball;
 import my_project.model.Brett;
+import my_project.model.Queen;
 import my_project.view.InputManager;
 
 import java.awt.event.MouseEvent;
@@ -18,6 +19,7 @@ public class ProgramController {
 
 
     // Referenzen
+    private Brett[] brett;
     private ViewController viewController;  // diese Referenz soll auf ein Objekt der Klasse viewController zeigen. Über dieses Objekt wird das Fenster gesteuert.
 
     /**
@@ -39,10 +41,27 @@ public class ProgramController {
         // Erstelle ein Objekt der Klasse Ball und lasse es zeichnen
         //Ball ball1 = new Ball(150,150);
         //viewController.draw(ball1);
+        int h = 0;
+        boolean help = false;
+        brett = new Brett[64];
+        for(int i = -1; i>-9 ; i = i -1){
+            for(int j = 8; j> 0; j = j - 1){
+                if((i+j)%2 == 0){
+                    help = false;
+                }else{
+                    help = true;
+                }
+                System.out.println(h);
+                brett[h] = new Brett(i,j,help,false,false);
+                viewController.draw(brett[h]);
+                h = h + 1;
+            }
+        }
 
-        Brett brett = new Brett();
-        viewController.draw(brett);
 
+        Queen queenW = new Queen();
+        viewController.draw(queenW);
+        viewController.register(queenW);
     }
 
     /**
